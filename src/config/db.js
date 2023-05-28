@@ -15,6 +15,7 @@ const connect = async () => {
     console.error(`Conectado a BD ${name} in ${host}`);
   } catch (error) {
     console.error(error, 'No conectado a BD');
+    process.exit(1);
   }
 };
 

@@ -1,54 +1,52 @@
-const {
-  getAllArtworksFromDB,
-  createArtworkInDB,
-  getArtworkByIdFromDB,
-  updateArtworkByIdInDB,
-  deleteArtworkInDB
-} = require('../repositories/artworks');
+const Artwork = require('../models/artwork');
 
 const getAllArtworks = async (req, res, next) => {
-  const artworks = await getAllArtworksFromDB();
-  res.status(200).json({ data: artworks });
+  try {
+    const artworks = await Artwork.find();
+    return res.status(200).json(artworks);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'No se han encontrado obras', error: error });
+  }
 };
 
 const createArtwork = async (req, res, next) => {
-  const newArtwork = await createArtworkInDB({
-    title: req.body.title,
-    author: req.body.author,
-    year: req.body.year,
-    area: req.body.area
-  });
-  res.status(201).json({ data: newArtwork });
+  try {
+    const newArtwork = new Author(req.body);
+    await newArtwork.save();
+    return res.status(201).json(newArtwork);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'No se ha podido crear la obra', error: error });
+  }
 };
 
 const getArtworkById = async (req, res, next) => {
-  const { id } = req.params;
   try {
-    const artwork = await getArtworkByIdFromDB(id);
-    res.status(200).json({ data: artwork });
+    const artwork = await Artwork.findById(req.params.id);
+    res.status(200).json(artwork);
   } catch (err) {
-    res.status(404).json({ data: 'Obra no encontrada' });
+    return next('Obra no encontrada', error);
   }
 };
 
 const updateArtworkById = async (req, res, next) => {
-  const { id } = req.params;
-  const { title, author, year, area } = req.body;
   try {
-    const artwork = await updateArtworkByIdInDB(id, { title, author, year, area });
-    res.status(200).json({ data: artwork });
+    const { id } = req.params;
+    const newArtwork = await Artwork.findByIdAndUpdate(id, req.body, {
+      new: true
+    });
+    return res.status(200).json(newArtwork);
   } catch (err) {
-    res.status(404).json({ data: 'Obra no encontrada' });
+    return next('Error actualizando obra', error);
   }
 };
 
 const deleteArtwork = async (req, res, next) => {
-  const { id } = req.params;
   try {
-    await deleteArtworkInDB(id);
-    res.status(200).json({ data: 'Obra borrada' });
+    const { id } = req.params;
+    await Artwork.findByIdAndDelete(id);
+    return res.status(200).json('Obra borrada');
   } catch (err) {
-    res.status(404).json({ data: 'Obra no encontrada' });
+    return next('Error borrando obra', error);
   }
 };
 

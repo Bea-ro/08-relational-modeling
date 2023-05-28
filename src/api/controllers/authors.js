@@ -1,54 +1,53 @@
-const {
-  getAllAuthorsFromDB,
-  createAuthorInDB,
-  getAuthorByIdFromDB,
-  updateAuthorByIdInDB,
-  deleteAuthorInDB
-} = require('../repositories/authors');
+const Author = require('../models/author');
 
 const getAllAuthors = async (req, res, next) => {
-  const authors = await getAllAuthorsFromDB();
-  res.status(200).json({ data: authors });
+  try {
+    const authors = await Author.find();
+    return res.status(200).json(authors);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'No se han encontrado autores', error: error });
+  }
 };
 
 const createAuthor = async (req, res, next) => {
-  const newAuthor = await createAuthorInDB({
-    name: req.body.name,
-    movement: req.body.movement,
-    area: req.body.area,
-    mainArtworks: req.body.mainArtworks
-  });
-  res.status(201).json({ data: newAuthor });
+  try {
+    const newAuthor = new Author(req.body);
+    await newAuthor.save();
+    return res.status(201).json(newAuthor);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'No se ha podido crear el autor', error: error });
+  }
 };
 
 const getAuthorById = async (req, res, next) => {
-  const { id } = req.params;
   try {
-    const author = await getAuthorByIdFromDB(id);
-    res.status(200).json({ data: author });
+    const { id } = req.params;
+    const author = await Author.findById(id);
+    return res.status(200).json(author);
   } catch (err) {
-    res.status(404).json({ data: 'Autor no encontrado' });
+    return next('Autor no encontrado', error);
   }
 };
 
 const updateAuthorById = async (req, res, next) => {
-  const { id } = req.params;
-  const { name, movement, area, mainArtworks } = req.body;
   try {
-    const author = await updateAuthorByIdInDB(id, { name, movement, area, mainArtworks });
-    res.status(200).json({ data: author });
+    const { id } = req.params;
+    const newAuthor = new Author(req.body);
+    newAuthor._id = id;
+    await Author.findByIdAndUpdate(id, newAuthor);
+    return res.status(200).json(newAuthor);
   } catch (err) {
-    res.status(404).json({ data: 'Autor no encontrado' });
+    return next('Error actualizando autor', error);
   }
 };
 
 const deleteAuthor = async (req, res, next) => {
-  const { id } = req.params;
   try {
-    await deleteAuthorInDB(id);
-    res.status(200).json({ data: 'Autor borrado' });
+    const { id } = req.params;
+    await Author.findByIdAndDelete(id);
+    return res.status(200).json('Autor borrado');
   } catch (err) {
-    res.status(404).json({ data: 'Autor no encontrado' });
+    return next('Error borrando autor', error);
   }
 };
 
