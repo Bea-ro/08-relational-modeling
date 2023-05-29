@@ -21,7 +21,7 @@ const createAuthor = async (req, res, next) => {
 
 const getAuthorById = async (req, res, next) => {
   try {
-    const author = await Author.findById(req.params.id);
+    const author = await Author.findById(req.params.id).populate('mainArtworks');
     return res.status(200).json(author);
   } catch (error) {
     return res.status(400).json({ mensaje: 'Autor no encontrado', error: error });

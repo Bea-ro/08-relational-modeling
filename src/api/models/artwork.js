@@ -15,6 +15,7 @@ const ArtworkSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: 'artworks'
   }
 );
 

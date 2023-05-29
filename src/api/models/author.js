@@ -12,7 +12,8 @@ const AuthorSchema = new mongoose.Schema(
     mainArtworks: [{ type: mongoose.Types.ObjectId, required: true, trim: true, ref: 'Artwork' }]
   },
   {
-    timestamps: true
+    timestamps: true,
+    collection: 'authors'
   }
 );
 

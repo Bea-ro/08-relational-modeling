@@ -1,4 +1,46 @@
-- [ ]  Un endpoint GET que me permite recuperar un elemento de la colección A y traer los datos de los elementos de la colección B con los que esté relacionado.
-- [ ]  Un endpoint GET que me permite recuperar un elemento de la colección B y los datos de un elemento de la colección A con el que esté relacionado.
-- [ ]  Un endpoint PUT que me permite añadir (o quitar si ya existe) un nuevo elemento B al array de elementos relacionado de un documento de la colección A.
-- [ ]  Un enpoint PUT que me permite cambiar o eliminar el campo de un documento de la colección B que apunta a un elemento de la colección A con el que está relacionado.
+## Endpoints relativos a https://localhost:4001/api
+
+Prueba página no encontrada: https://localhost:4001/api/autor
+
+### MODELO AUTORES: 
+
+| HTTP Request | Endpoint      | Descripción       |
+|--------------|---------------|-------------------|
+| GET          | /autores      | Todos los autores |
+| GET          | /autores/{id} | Autor por id      |
+| POST         | /autores      | Crear autor       |
+| PUT          | /autores/{id} | Editar autor      |
+| DELETE       | /autores/{id} | Borrar autor      |
+
+### MODELO OBRAS: 
+
+| HTTP Request | Endpoint    | Descripción     |
+|--------------|-------------|-----------------|
+| GET          | /obras      | Todas las obras |
+| GET          | /obras/{id} | Obra por id     |
+| POST         | /obras      | Crear obra      |
+| PUT          | /obras/{id} | Editar obra     |
+| DELETE       | /obras/{id} | Borrar obra     |
+
+### MODELO MOVIMIENTOS: 
+
+| HTTP Request | Endpoint          | Descripción           |
+|--------------|-------------------|-----------------------|
+| GET          | /movimientos      | Todos los movimientos |
+| GET          | /movimientos/{id} | Movimiento por id     |
+| POST         | /movimientos      | Crear movimiento      |
+| PUT          | /movimientos/{id} | Editar movimiento     |
+| DELETE       | /movimientos/{id} | Borrar movimiento     |
+ 
+### MODELO RELACIONAL:
+
+| HTTP Req. | Endpoint          | Descripción                                               |
+|-----------|-------------------|-----------------------------------------------------------|
+| GET       | /autores/{id}     | Recuperar autor y traer los datos de sus obras            |
+| GET       | /obras/{id}       | Recuperar obra y los datos de su autor                    |
+| PUT       | /autores/{id}     | Añadir o quitar obra a un autor                           |
+| PUT       | /obras/{id}       | Cambiar o eliminar el campo autor de una obra             |
+| GET       | /movimientos/{id} | Recuperar movimiento y traer datos de sus obras y autores |
+
+### SEED:
+Se ha añadido archivo seed.js para practicar la creación de una seed, así como tener datos para probar las requests. 

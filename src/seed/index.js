@@ -14,18 +14,18 @@ mongoose
 
       if (oldAuthors) {
         await Author.collection.drop();
-        console.log('Authors defeat');
+        console.log('La colección Authors se ha vaciado');
       }
       if (oldArtworks) {
         await Artwork.collection.drop();
-        console.log('Artworks defeat');
+        console.log('La colección Artworks se ha vaciado');
       }
 
       await Author.insertMany(seed.authors);
       await Artwork.insertMany(seed.artworks);
-      console.log('Data saved!');
+      console.log('Datos guardados');
     } catch (error) {
-      console.log('Error saving data: ' + error);
+      console.log('Error guardando los datos: ' + error);
     }
   })
   .finally(() => mongoose.disconnect());
