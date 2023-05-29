@@ -14,7 +14,7 @@
     "format:fix": "prettier --write --ignore-path .gitignore ./src"
   },
   "keywords": [],
-  "author": "",
+  "author": "Beatriz Rodríguez",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
