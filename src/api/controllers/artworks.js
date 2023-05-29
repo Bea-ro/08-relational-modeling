@@ -50,10 +50,21 @@ const deleteArtwork = async (req, res, next) => {
   }
 };
 
+const deleteArtworkFieldById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Artwork.findByIdAndUpdate(id, { $unset: { author: 1 } }, { new: true });
+    return res.status(200).json('Campo autor borrado');
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Error borrando el campo autor', error: error });
+  }
+};
+
 module.exports = {
   getAllArtworks,
   createArtwork,
   getArtworkById,
   updateArtworkById,
-  deleteArtwork
+  deleteArtwork,
+  deleteArtworkFieldById
 };

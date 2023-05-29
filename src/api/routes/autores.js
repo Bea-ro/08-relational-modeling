@@ -4,7 +4,8 @@ const {
   createAuthor,
   getAuthorById,
   updateAuthorById,
-  deleteAuthor
+  deleteAuthor,
+  addOrRemoveArtwork
 } = require('../controllers/authors');
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.get('/:id', getAuthorById);
 router.post('/', createAuthor);
 router.put('/:id', updateAuthorById);
 router.delete('/:id', deleteAuthor);
+router.put('/:id/obra', addOrRemoveArtwork);
 
 module.exports = router;
