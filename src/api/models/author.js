@@ -9,11 +9,10 @@ const AuthorSchema = new mongoose.Schema(
       enum: ['pintura', 'escultura', 'arquitectura'],
       required: true
     },
-    mainArtworks: { type: [String], required: true }
+    mainArtworks: [{ type: mongoose.Types.ObjectId, required: true, trim: true, ref: 'Artwork' }]
   },
   {
-    timestamps: true,
-    collection: 'authors'
+    timestamps: true
   }
 );
 

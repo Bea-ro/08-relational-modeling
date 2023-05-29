@@ -11,9 +11,9 @@ const getAllArtworks = async (req, res, next) => {
 
 const createArtwork = async (req, res, next) => {
   try {
-    const newArtwork = new Author(req.body);
-    await newArtwork.save();
-    return res.status(201).json(newArtwork);
+    const newArtwork = new Artwork(req.body);
+    const createdArtwork = await newArtwork.save();
+    return res.status(201).json(createdArtwork);
   } catch (error) {
     return res.status(400).json({ mensaje: 'No se ha podido crear la obra', error: error });
   }
@@ -23,8 +23,8 @@ const getArtworkById = async (req, res, next) => {
   try {
     const artwork = await Artwork.findById(req.params.id);
     res.status(200).json(artwork);
-  } catch (err) {
-    return next('Obra no encontrada', error);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Obra no encontrada', error: error });
   }
 };
 
@@ -35,8 +35,8 @@ const updateArtworkById = async (req, res, next) => {
       new: true
     });
     return res.status(200).json(newArtwork);
-  } catch (err) {
-    return next('Error actualizando obra', error);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Error actualizando obra', error: error });
   }
 };
 
@@ -45,8 +45,8 @@ const deleteArtwork = async (req, res, next) => {
     const { id } = req.params;
     await Artwork.findByIdAndDelete(id);
     return res.status(200).json('Obra borrada');
-  } catch (err) {
-    return next('Error borrando obra', error);
+  } catch (error) {
+    return res.status(400).json({ mensaje: 'Error borrando obra', error: error });
   }
 };
 

@@ -7,11 +7,15 @@
     "start": "node .",
     "dev": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node src/seed/index.js"
+    "seed": "node ./src/seed/index.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "format": "prettier --check --ignore-path .gitignore ./src",
+    "format:fix": "prettier --write --ignore-path .gitignore ./src"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
