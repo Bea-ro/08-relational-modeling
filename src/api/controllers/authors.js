@@ -54,14 +54,27 @@ const addOrRemoveArtwork = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { mainArtwork } = req.body;
-    const updatedAuthor = await Author.findByIdAndUpdate(
-      id,
-      {
-        $addToSet: { mainArtworks: mainArtwork }
-      },
-      { new: true }
-    );
-    return res.status(200).json(updatedAuthor);
+    const selectedAuthor = await Author.findById(id);
+
+    if (selectedAuthor.mainArtworks.includes(mainArtwork)) {
+      const updatedAuthor = await Author.findByIdAndUpdate(
+        id,
+        {
+          $pull: { mainArtworks: mainArtwork }
+        },
+        { new: true }
+      );
+      return res.status(200).json(updatedAuthor);
+    } else {
+      const updatedAuthor = await Author.findByIdAndUpdate(
+        id,
+        {
+          $addToSet: { mainArtworks: mainArtwork }
+        },
+        { new: true }
+      );
+      return res.status(200).json(updatedAuthor);
+    }
   } catch (error) {
     return res.status(400).json({ mensaje: 'Error añadiendo obra al autor', error: error });
   }
