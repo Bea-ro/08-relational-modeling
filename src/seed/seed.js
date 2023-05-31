@@ -4,19 +4,19 @@ const seed = {
       name: 'Gian Lorenzo Bernini',
       movement: 'Barroco',
       area: ['escultura', 'pintura'],
-      mainArtworks: ['El Éxtasis de Santa Teresa', 'El rapto de Proserpina']
+      mainArtworks: ['El rapto de Proserpina']
     },
     {
-      name: 'Migul Angel Buonarroti',
+      name: 'Miguel Angel Buonarroti',
       movement: 'Renacimiento',
       area: ['escultura', 'pintura', 'arquitectura'],
-      mainArtworks: ['La Capilla Sixtina', 'El David', 'La Piedad']
+      mainArtworks: ['La Capilla Sixtina', 'Cúpula de la Basílica de San Pedro', 'El Moisés']
     },
     {
       name: 'Sandro Botticelli',
       movement: 'Renacimiento',
       area: ['pintura'],
-      mainArtworks: ['La Primavera', 'El nacimiento de Venus']
+      mainArtworks: ['La primavera']
     },
     {
       name: 'Leonardo da Vinci',

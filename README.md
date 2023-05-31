@@ -44,4 +44,4 @@ Prueba página no encontrada: https://localhost:4001/api/autor
 
 
 ### SEED:
-Se ha añadido archivo seed.js para practicar la creación de una seed, así como tener datos para probar las requests. 
+Se ha añadido archivo seed.js para practicar la creación de una seed, así como tener datos para probar las requests. La función es previa a la relación entre modelos. Se está trabajando en la misma para que funcione tras relacionar los modelos.

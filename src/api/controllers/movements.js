@@ -1,4 +1,4 @@
-const Movement = require('../models/Movement');
+const Movement = require('../models/movement');
 
 const getAllMovements = async (req, res, next) => {
   try {
