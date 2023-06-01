@@ -22,15 +22,6 @@ mongoose
       }
 
       await Artwork.insertMany(seed.artworks);
-      // const artworks = await Artwork.find();
-
-      // seed.authors.forEach((author) => {
-      //   author.mainArtworks = author.mainArtworks.map((artworkTitle) => {
-      //     const matchingArtwork = artworks.find((artwork) => artwork.title === artworkTitle);
-      //     console.log(matchingArtwork);
-      //     //if (matchingArtwork) {return matchingArtwork._id}
-      //   });
-      // });
       await Author.insertMany(seed.authors);
 
       console.log('Datos guardados');
