@@ -5,6 +5,7 @@
 ### Javascript, MongoDB, Express, React, Node (MERN)
 - Tres modelos relacionados a través de **populate**.
 - Peticiones para añadir, editar o eliminar el campo correspondiente al modelo relacionado.
+- Configuración y uso de **Eslint** y **Prettier**.
 
 
 ## Endpoints relativos a https://localhost:4001/api
